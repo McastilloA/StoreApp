@@ -1,0 +1,12 @@
+<div class="flex bg-slate-100 w-screen antialiased text-slate-300 selection:bg-blue-600 selection:text-white sm:h-auto">
+  <div class="flex relative w-screen">
+    @defer (when !breakpoint.mobileSignal()) {
+    <app-sidemenu />
+    }@loading {
+    <app-loading />
+    }
+    <div class="text-black p-5 h-auto w-full">
+      <router-outlet />
+    </div>
+  </div>
+</div>

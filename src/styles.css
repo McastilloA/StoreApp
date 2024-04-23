@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mdc-dialog .mdc-dialog__content {
+  padding: 0 !important;
+}
+
+.mat-mdc-paginator-container {
+  padding: 12px !important;
+}
+
+.svg-icon {
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  height: 24px;
+  width: 24px;
+  margin: auto;
+}
+
+.icon-products {
+  background-image: url("assets/icons/products.svg");
+}
+
+.icon-categories {
+  background-image: url("assets/icons/categories.svg");
+}
+
+.icon-users {
+  background-image: url("assets/icons/users.svg");
+}
+
+.icon-add {
+  background-image: url("assets/icons/add.svg");
+}

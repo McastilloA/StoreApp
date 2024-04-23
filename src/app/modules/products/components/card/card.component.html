@@ -1,0 +1,102 @@
+@if (listProducts) {
+<div class="flex flex-auto items-center justify-between pb-4">
+  <label for="table-search" class="sr-only">Search</label>
+  <div class="relative w-full me-2">
+    <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+      <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </div>
+    <input type="text" id="table-search" class="block p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg 
+        w-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
+        dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      (keyup)="filterProducts($event)" placeholder="Typing...">
+  </div>
+
+  <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-blue-300 
+    font-medium rounded-full text-sm p-4 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 
+    dark:focus:ring-blue-800" type="button" (click)="openDialog('', 0)">
+    <i class="icon-add svg-icon"></i>
+    <span class="sr-only">Icon description</span>
+  </button>
+</div>
+
+<div class="!w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+  <div class="flex items-center justify-between mb-4">
+    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Products list</h5>
+    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+      Action
+    </div>
+  </div>
+  <div class="flow-root">
+    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+
+      @for (product of listProducts | search: 'name' : searchFilter; track $index) {
+      <li class="py-3 sm:py-4">
+        <div class="flex items-center">
+          <div class="flex-shrink-0 grid">
+            <img class="h-12 w-12 rounded-full" src="https://placehold.co/10?text={{product.quantity}}" alt="avatar" />
+            <small class="text-center text-xs text-gray-500 dark:text-gray-400">
+              Quantity
+            </small>
+          </div>
+          <div class="flex-1 min-w-0 ms-4">
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+              {{product.name}}
+            </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              {{product.description}}
+            </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Price: $ {{product.price}}
+            </p>
+          </div>
+          <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{product}"
+              aria-label="icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu">
+              <ng-template matMenuContent let-product="product">
+                <button mat-menu-item type="button" (click)="openDialog(product, 1)">
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button mat-menu-item (click)="onDeleteProduct(product.id)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Quit</span>
+                </button>
+              </ng-template>
+            </mat-menu>
+          </div>
+        </div>
+      </li>
+      }@empty {
+      <li class="py-3 sm:py-4">
+        <div class="flex items-center">
+          <div
+            class="w-full flex items-center p-4 m-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Info alert!</span> No data matching the filter "{{searchFilter}}".
+            </div>
+          </div>
+        </div>
+      </li>
+      }
+    </ul>
+  </div>
+</div>
+}
+
+<app-loading [hidden]="!showSpinner" />

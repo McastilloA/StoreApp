@@ -1,0 +1,9 @@
+.mat-column-action,
+.mat-column-name,
+.mat-column-quantity,
+.mat-column-price {
+  flex: none;
+  width: 100px;
+  padding: 0 !important;
+  justify-content: center;
+}

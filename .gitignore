@@ -21,6 +21,8 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
+.nx/*
+.nx
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -36,6 +38,8 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+.package-lock.json
+.pnpm-lock.yaml
 
 # System files
 .DS_Store
