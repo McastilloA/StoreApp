@@ -21,7 +21,6 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
-.nx/*
 .nx
 .vscode/*
 !.vscode/settings.json
@@ -30,7 +29,7 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-# Miscellaneous
+# Miscellaneous and Angular
 /.angular/cache
 .sass-cache/
 /connect.lock
@@ -38,8 +37,9 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
-.package-lock.json
-.pnpm-lock.yaml
+package-lock.json
+pnpm-lock.yaml
+.angular
 
 # System files
 .DS_Store
